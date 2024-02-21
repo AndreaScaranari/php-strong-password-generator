@@ -1,10 +1,22 @@
 <?php
-$p_len = $_GET['p-length'] ?? '';
 
-// # Funzioni
+// # Funzioni importate
 require __DIR__ . '/logic/functions.php';
 
+// # Data
+$p_len = $_GET['p-length'] ?? '';
 $password = randomPassword($p_len);
+
+// # Redirect
+if (!empty($p_len)) {
+    // Avviare la sessione
+    session_start();
+    $_SESSION['p_len'] = $p_len; 
+    $_SESSION['password'] = $password;
+
+    header ('Location: ./pwresults.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +49,7 @@ $password = randomPassword($p_len);
                 <form action="" method="GET" class="py-3 rounded">
                     <div class="input-group py-2 d-flex justify-content-center gap-3 align-items-center">
                     <label class="rounded col-2" for="p-length">Lunghezza Password</label>
-                    <input class="rounded col-2" type="number" name="p-length" min="5" max="20" value="<?= !$p_len ? '5' : "$p_len" ?>">
+                    <input class="rounded col-2 ps-2" type="number" name="p-length" min="5" max="20" value="<?= !$p_len ? '5' : "$p_len" ?>">
                     </div>
                     <button class="btn btn-primary">Invia</button>
                     <button class="btn btn-secondary">Annulla</button>
