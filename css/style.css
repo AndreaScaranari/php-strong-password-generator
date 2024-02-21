@@ -9,3 +9,7 @@ form {
 button.btn {
     margin-top: 1rem;
 }
+
+body p {
+    margin: 0;
+}

@@ -1,3 +1,25 @@
+<?php
+
+// # Data
+$p_len = $_GET['p-length'] ?? '';
+$password = randomPassword($p_len);
+
+
+// # Funzioni
+function randomPassword($p_len) {
+    $char_list = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $password = [];
+    $char_list_length = strlen($char_list) - 1;
+
+    for ($i = 0; $i < $p_len; $i++) {
+        $random_number = rand(0, $char_list_length);
+        $password[] = $char_list[$random_number];
+    }
+
+    return implode($password);
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,19 +37,25 @@
         <h1>Strong Password Generator</h1>
         <h3>Genera una password sicura</h3>
     </header>
+
     <main>
         <div class="container">
-            <div class="form-card text-center">
-                <form action="" method="GET" class="py-3">
+
+            <!-- risultato password -->
+            <div id="pw-result" class="text-white text-center p-2 bg-success rounded mb-3 <?= !$p_len ? 'd-none' : '' ?>">
+                <p>La password di <b><?= $p_len ?></b> caratteri che abbiamo generato per te è: <b><?= $password ?></b></p>
+            </div>
+
+            <!-- riquadro generazione password -->
+            <div id="pw-generator" class="form-card text-center">
+                <form action="" method="GET" class="py-3 rounded">
                     <div class="input-group py-2 d-flex justify-content-center gap-3 align-items-center">
-                    <label for="p-length">Lunghezza Password</label>
-                    <input type="number" name="p-length" >
+                    <label class="rounded col-2" for="p-length">Lunghezza Password</label>
+                    <input class="rounded col-2" type="number" name="p-length" min="5" max="20">
                     </div>
                     <button class="btn btn-primary">Invia</button>
                     <button class="btn btn-secondary">Annulla</button>
                 </form>
-
-
             </div>
         </div>
     </main>
