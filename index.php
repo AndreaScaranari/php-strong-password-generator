@@ -1,24 +1,10 @@
 <?php
-
-// # Data
 $p_len = $_GET['p-length'] ?? '';
-$password = randomPassword($p_len);
-
 
 // # Funzioni
-function randomPassword($p_len) {
-    $char_list = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    $password = [];
-    $char_list_length = strlen($char_list) - 1;
+require __DIR__ . '/logic/functions.php';
 
-    for ($i = 0; $i < $p_len; $i++) {
-        $random_number = rand(0, $char_list_length);
-        $password[] = $char_list[$random_number];
-    }
-
-    return implode($password);
-}
-
+$password = randomPassword($p_len);
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +37,7 @@ function randomPassword($p_len) {
                 <form action="" method="GET" class="py-3 rounded">
                     <div class="input-group py-2 d-flex justify-content-center gap-3 align-items-center">
                     <label class="rounded col-2" for="p-length">Lunghezza Password</label>
-                    <input class="rounded col-2" type="number" name="p-length" min="5" max="20">
+                    <input class="rounded col-2" type="number" name="p-length" min="5" max="20" value="<?= !$p_len ? '5' : "$p_len" ?>">
                     </div>
                     <button class="btn btn-primary">Invia</button>
                     <button class="btn btn-secondary">Annulla</button>
