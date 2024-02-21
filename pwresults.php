@@ -23,9 +23,12 @@ session_start();
 <div class="container">
 
     <!-- risultato password -->
-    <div id="pw-result" class="text-white text-center p-2 bg-success rounded mb-3 <?= !$_SESSION['p_len'] ? 'd-none' : '' ?>">
+    <div id="pw-result" class="text-white text-center p-2 bg-success rounded mb-3">
         <p>La password di <b><?= $_SESSION['p_len'] ?></b> caratteri che abbiamo generato per te è: <b><?= $_SESSION['password'] ?></b></p>
     </div>
+
+    <!-- link a index -->
+    <a href="index.php" class="back-to-index text-white">Torna alla schermata principale</a>
 
 </div>
     
